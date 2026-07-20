@@ -16,5 +16,26 @@ model User {
   id          String    @id
   createdAt   DateTime  @default(now())
   lastLogin   DateTime?
+  profile     UserProfile?
 }
 
+model UserProfile {
+  userId       String @id
+  name            String
+  bio             String?
+  age             Int?
+  sex             Sex?
+  profilePhotoUrl String?
+
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+enum Sex {
+  MALE
+  FEMALE
+  OTHER
+  PREFER_NOT_TO_SAY
+}
