@@ -1,6 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import { HttpError } from "../shared/errors/http.error.js";
 import { HttpErrorStatus } from "../shared/constants/http_status.js";
+import type { HttpBody } from "../shared/types/http_body.js";
 
 export function errorMiddleware(
   error: unknown,
@@ -21,7 +22,7 @@ export function errorMiddleware(
     }
   };
 
-  const body = {
+  const body: HttpBody<null> = {
     success: false,
     error: getError().message,
   };
